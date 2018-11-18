@@ -7,7 +7,9 @@ public class MoveCamera : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     float tempo = 0;
-    float lastClick = 0;
+    float tempoDash = 1;
+    float tempoAux = 0;
+    char ultimaTecla=' ';
     float speedX = 3.0f;
     float speedY = 3.0f;
     float yaw = 0.0f;
@@ -20,20 +22,11 @@ public class MoveCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        
         var up = new Vector3(0, 1, 0);
         var down = new Vector3(1, 0, 0);
-        var k = new Vector3(
-    transform.worldToLocalMatrix.m20,
-    0,
-    transform.worldToLocalMatrix.m22);
+        var k = new Vector3(transform.worldToLocalMatrix.m20,0,transform.worldToLocalMatrix.m22);
         k.Normalize();
-        var i = new Vector3(
-    transform.worldToLocalMatrix.m00,
-    transform.worldToLocalMatrix.m01,
-    transform.worldToLocalMatrix.m02);
-
+        var i = new Vector3(transform.worldToLocalMatrix.m00,transform.worldToLocalMatrix.m01,transform.worldToLocalMatrix.m02);
 
         tempo += Time.deltaTime;
 
@@ -41,8 +34,7 @@ public class MoveCamera : MonoBehaviour {
         pitch -= speedY * Input.GetAxis("Mouse Y");
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
-
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1")) 
         {
             Fire();
         }
@@ -55,9 +47,42 @@ public class MoveCamera : MonoBehaviour {
         {
             transform.position += -k * speed;
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (tempoAux != 0 && tempo - tempoAux <= tempoDash && ultimaTecla == 'a')
+            {
+                transform.position += -i * (speed * 30);
+                tempoAux = 0;
+                ultimaTecla = ' ';
+            }
+            else
+            {
+                tempoAux = tempo;
+                ultimaTecla = 'a';
+            }
+
+        }
+
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += -i * speed;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (tempoAux != 0 && tempo - tempoAux <= tempoDash && ultimaTecla=='d')
+            {
+                transform.position += i * (speed * 30);
+                tempoAux = 0;
+                ultimaTecla = ' ';
+            }
+            else
+            {
+                tempoAux = tempo;
+                ultimaTecla = 'd';
+            }
+
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -80,5 +105,14 @@ public class MoveCamera : MonoBehaviour {
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 10;
 
         Destroy(bullet, 3.0f);
+    }
+    //implementando
+    /*Preciso descobrir os keyCode, foi retornado os valores da tabela ASCII quando fiz um mapeamento 
+     * mas não estão sendo aceito quando passo o código como parametro no Input.GetKey(até faz sentido
+     * não aceitar, já que é esperado uma ação do teclado e estou passando um parametro que não é do Event).  
+    */
+    void dash()
+    {
+
     }
 }
