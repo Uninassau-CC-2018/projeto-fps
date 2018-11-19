@@ -23,8 +23,9 @@ GameObject:
   - component: {fileID: 135968143253458452}
   - component: {fileID: 23932626602826362}
   - component: {fileID: 54860785231477646}
+  - component: {fileID: 114113819951127686}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bala
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +100,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114113819951127686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807016348857998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1281810ed2c09db4abe17fcdba4f9f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135968143253458452
 SphereCollider:
   m_ObjectHideFlags: 1

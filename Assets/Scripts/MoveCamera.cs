@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour {
-
-    public GameObject bulletPrefab;
-    public Transform bulletSpawn;
     float tempo = 0;
-    float tempoDash = 1;
+    float tempoDash = 0.4f;
     float tempoAux = 0;
     char ultimaTecla=' ';
     float speedX = 3.0f;
@@ -17,7 +14,6 @@ public class MoveCamera : MonoBehaviour {
     float speed = 0.05f;
     // Use this for initialization
     void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -34,10 +30,7 @@ public class MoveCamera : MonoBehaviour {
         pitch -= speedY * Input.GetAxis("Mouse Y");
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
-        if (Input.GetButtonDown("Fire1")) 
-        {
-            Fire();
-        }
+        
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -96,16 +89,7 @@ public class MoveCamera : MonoBehaviour {
         if (Input.GetKey(KeyCode.DownArrow)) transform.Rotate(down, 1, Space.Self);
       
     }
-    void Fire()
-    {
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 10;
-
-        Destroy(bullet, 3.0f);
-    }
+    
     //implementando
     /*Preciso descobrir os keyCode, foi retornado os valores da tabela ASCII quando fiz um mapeamento 
      * mas não estão sendo aceito quando passo o código como parametro no Input.GetKey(até faz sentido

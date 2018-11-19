@@ -8,8 +8,9 @@ public class Armas : MonoBehaviour {
     private int dano;
     private int alcance;
     private int qtdAtualBalas;
+    private int qtdMaxRecarga;
 
-    public int tdMaxBalas
+    public int QtdMaxBalas
     {
         get
         {
@@ -66,6 +67,18 @@ public class Armas : MonoBehaviour {
         set
         {
             qtdAtualBalas = value;
+        }
+    }
+
+    public int QtdMaxRecarga
+    {
+        get
+        {
+            return qtdMaxRecarga;
+        }
+        set
+        {
+            qtdMaxRecarga = value;
         }
     }
 
